@@ -37,15 +37,12 @@ POST Request Examples
             text: "Unfortunately I was not able to invest as much time as I would like in the projects for itis6177."
         },
         
-        {
-            language: "it",
+        { language: "it",
             id: "3",
-            text:
-                "Charlotte ha alcuni ottimi ristoranti italiani!"
+            text:  "Charlotte ha alcuni ottimi ristoranti italiani!"
         },
         
-        {
-            language: "es",
+        {  language: "es",
             id: "4",
             text: "UNCC es un gran lugar para estudiantes internacionales."
         },
