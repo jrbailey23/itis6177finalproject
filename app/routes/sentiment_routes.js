@@ -8,24 +8,28 @@ module.exports = function(app) {
 
 
 
-    //Receive a new sentiment through POST request coming to server
-    app.post('/sentiments', (req, res) => {
-        // Create new sentiment
-        console.log(req.body)
-        res.send('New sentiment has been received')
+    //Receive new sentiment through POST request coming to server in Digital Ocean
+    //Centos server with pubilc IP of 206.189.191.83 listening on port 3008
+    app.post('/sentiments', (req, response) => {
 
+        //Write to console that new sentiment has been received
+        console.log(req.body)
+        response.send('New sentiment has been received')
+
+        //Take parameters from the body of the POST request and put them into sentimentInput that can be passed on to Azure Cognative services
         const sentimentInput = {text: req.body.language, text: req.body.id, text: req.body.text };
 
         let https = require ('https');
 
-        //subscription key for cognitive services created for final project
+        //Subscription key for cognitive services created for final project
         const subscription_key = "523461e265bd471c9cb033eb69bad5e3";
         
-        //end point url for cognitive services created for final project
+        //End point url for cognitive services created for final project
         const endpoint = "https://eastus.api.cognitive.microsoft.com/";
         
         let path = '/text/analytics/v2.1/sentiment';
         
+        //Get response from Azure Cognative Services and display body in console
         let response_handler = function (response) {
             let body = '';
             response.on('data', function (d) {
@@ -40,9 +44,12 @@ module.exports = function(app) {
                 console.log('Error: ' + e.message);
             });
         };
+
+        //Other routes for GET, UPDATE, and DELETE will be created here in later versions
         
-        let get_sentiments = function (documents) {
-            let body = JSON.stringify(documents);
+        //Create POST request to send sentiments to Azure Cognative Services
+        let get_sentiments = function (sentimentInput) {
+            let body = JSON.stringify(sentimentInput);
         
             let request_params = {
                 method: 'POST',
