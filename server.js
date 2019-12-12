@@ -9,6 +9,8 @@ const app           = express();
 
 const port = 3008;
 
+require('./app/routes')(app, {});
+
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
