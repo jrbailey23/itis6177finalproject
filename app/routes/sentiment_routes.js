@@ -46,10 +46,11 @@ module.exports = function(app) {
         };
 
         //Other routes for GET, UPDATE, and DELETE will be created here in later versions
-        
+    async function sentimentAnalysis(client){  
         //Create POST request to send sentiments to Azure Cognative Services
         let get_sentiments = function (sentimentInput) {
             let body = JSON.stringify(sentimentInput);
+            
         
             let request_params = {
                 method: 'POST',
@@ -63,7 +64,10 @@ module.exports = function(app) {
             let req = https.request(request_params, response_handler);
             req.write(body);
             req.end();
-        }
-    });
-};
+        };
+    
+    }
 sentimentAnalysis(textAnalyticsClient)
+})
+
+};
